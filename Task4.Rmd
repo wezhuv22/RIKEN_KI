@@ -1,0 +1,58 @@
+---
+title: "Task4"
+author: "Wentao"
+date: "2025-10-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+
+## Q1. Square root of 10
+# Square root of 10
+sqrt(10)
+
+##Q2
+# Logarithm base 2
+log(32, base = 2)
+#Q3
+# Sum of numbers from 1 to 1000
+sum(1:1000)
+#Q4
+# Sum of even numbers from 2 to 1000
+sum(seq(2, 1000, by = 2))
+
+# Alternative method: 2*(1+2+...+500)
+sum(2*(1:500))
+
+#Q5
+# Pairwise comparisons among 100 genes
+n <- 100
+choose(n, 2)
+
+#Q6
+# Number of ordered triples from 100 genes
+n <- 100
+k <- 3
+prod(n:(n-k+1))   # 100*99*98
+
+# Equivalent method using factorials
+factorial(n)/factorial(n-k)
+
+sessionInfo()
+
+
+```
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
