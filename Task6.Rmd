@@ -1,0 +1,58 @@
+---
+title: "Task6"
+author: "Wentao"
+date: "2025-10-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+## Task 6 – R Functions
+
+ratio_mean_median <- function(x) {
+  mean(x)/median(x)
+}
+ignore_min_max_mean <- function(x) {
+  m <- min(x)
+  M <- max(x)
+  x_new <- x[x != m & x != M]
+  mean(x_new)
+}
+v <- c(1,2,3,4,5,100)
+ratio_mean_median(v)
+ignore_min_max_mean(v)
+
+pipes_explanation <- "Pipes make code readable by chaining functions, avoid when debugging or when too complex"
+pipes_explanation
+
+apply_explanation <- "Apply family efficiently applies functions over arrays or lists, useful for genomic data"
+apply_explanation
+
+m <- matrix(1:9, nrow=3)
+apply(m,1,sum)
+l <- list(a=1:3,b=4:6)
+lapply(l,mean)
+sapply(l,mean)
+
+sessionInfo()
+
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
