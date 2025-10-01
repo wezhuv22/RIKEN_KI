@@ -1,0 +1,58 @@
+---
+title: "Task8"
+author: "Wentao"
+date: "2025-10-01"
+output: html_document
+---
+
+```{r}
+devtools::install_github("hirscheylab/tidybiology")
+
+
+library(devtools)
+library(tidyverse)
+library(tidybiology)
+
+data("chromosome")
+data("proteins")
+
+chrom_stats <- chromosome %>%
+  summarise(across(c(variations, protein_codinggenes, mi_rna),
+                   list(mean=mean, median=median, max=max), na.rm=TRUE))
+chrom_stats
+
+ggplot(chromosome, aes(x=basepairs)) +
+  geom_histogram(bins=30, fill="steelblue", alpha=0.7) +
+  theme_minimal() +
+  labs(title="Chromosome Size Distribution", x="Basepairs", y="Count")
+
+ggplot(chromosome, aes(x=basepairs, y=protein_codinggenes)) +
+  geom_point(color="darkred", alpha=0.7) +
+  geom_smooth(method="lm", se=FALSE, color="black") +
+  theme_minimal() +
+  labs(title="Protein-coding genes vs Chromosome length", 
+       x="Chromosome basepairs", y="Protein coding genes")
+
+ggplot(chromosome, aes(x=basepairs, y=mi_rna)) +
+  geom_point(color="darkgreen", alpha=0.7) +
+  geom_smooth(method="lm", se=FALSE, color="black") +
+  theme_minimal() +
+  labs(title="miRNAs vs Chromosome length", 
+       x="Chromosome basepairs", y="miRNAs")
+
+prot_stats <- proteins %>%
+  summarise(across(c(length, mass),
+                   list(mean=mean, median=median, max=max), na.rm=TRUE))
+prot_stats
+
+ggplot(proteins, aes(x=length, y=mass)) +
+  geom_point(alpha=0.6, color="purple") +
+  geom_smooth(method="lm", se=FALSE, color="orange") +
+  theme_classic(base_size=14) +
+  labs(title="Protein length vs mass", x="Length", y="Mass")
+
+sessionInfo()
+
+
+
+```
