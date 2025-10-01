@@ -1,0 +1,77 @@
+# Assignment 1 – Task 1: Literature
+
+## 1. Medically Relevant Insight
+
+The key achievement of this study is the systematic annotation of **transcribed cis-regulatory elements (tCREs) across human cell types using **single-cell 5′ RNA-seq (sc-5′ RNA-seq)**.  
+
+The authors analyzed **341,156 single cells from 23 tissues covering 180 cell types, and identified 175,032 tCREs. These are regulatory elements that show transcriptional activity, often producing short non-coding RNAs (such as eRNAs), which indicate that the regulatory site is actively engaged.  
+
+### Major medical insights:
+- **Linking disease-associated variants to specific cell types**  
+  By mapping GWAS variants to tCREs, the study revealed how genetic risk is mediated through **cell-type specific regulatory activity**.  
+  For example:  
+  - **Rheumatoid arthritis (RA):** enrichment of risk variants in **T cell–specific regulatory elements**.  
+  - **Crohn’s disease (CD):** variants enriched in **monocytes and fibroblasts**.  
+  - **Ulcerative colitis (UC):** enrichment in **CD8+ memory T cells and NK cells**.  
+  - **Neurodegenerative diseases:** Alzheimer’s and Parkinson’s risk variants strongly associated with **microglia and oligodendrocytes**.  
+
+- **ICE-CREAM score**  
+  The authors developed **ICE-CREAM (Integrative Cell-type Enrichment of CREs and Module)**, a scoring method to quantify the contribution of each cell type to heritability at the level of CREs. This highlighted the fact that **genetic risk is concentrated in specific cell subsets** rather than being uniformly distributed.  
+
+- **Clinical significance**  
+  - Provides a new **atlas of cell-type-specific regulatory activity**.  
+  - Bridges the gap between **GWAS signals** and **molecular mechanisms**.  
+  - Enables identification of **cell-type-specific drivers of disease**, which could guide future diagnostics, stratification, and therapeutic target discovery.  
+
+---
+
+## 2. Genomics Technologies Used
+
+The study employed a combination of single-cell and bulk genomic technologies:
+
+1. **Single-cell RNA-seq (sc-5′ RNA-seq, sc-end5-dT, sc-end5-rand, sc-end3-dT)**  
+   - Captures transcription start sites (TSSs) and gene expression.  
+   - Enables detection of short eRNA transcripts arising from active CREs.  
+
+2. **Single-cell ATAC-seq**  
+   - Profiles chromatin accessibility, providing evidence for regulatory potential.  
+
+3. **Bulk RNA-seq**  
+   - Used as a reference for global transcriptional profiles.  
+
+4. **Bulk ATAC-seq**  
+   - Provides complementary information about chromatin openness at the population level.  
+
+5. **Bulk CAGE (Cap Analysis of Gene Expression)**  
+   - Precisely identifies transcription start sites, helping validate tCRE annotations.  
+
+---
+
+## 3. Further Research Questions
+
+### Q1. Tissue-specificity of genetic risk variants  
+- **Question**: Do GWAS variants show different regulatory patterns in tCREs across different tissues or organs?  
+- **Relevance**: Explains why the same genetic variant may lead to distinct clinical manifestations depending on the tissue context.  
+- **Expected outcome**: Identification of **tissue-specific regulatory networks** and biomarkers.  
+
+---
+
+### Q2. Dynamics of tCRE activity during disease progression  
+- **Question**: How do tCREs change in activity between early and late stages of disease, or under different conditions (e.g., inflammation vs. remission, drug treatment)?  
+- **Relevance**: Helps identify **molecular markers of disease progression** and potential therapeutic windows.  
+- **Example**: Compare RA or CD patients during flare vs. remission phases to reveal dynamic tCRE activity.  
+
+---
+
+### Q3. Cross-species conservation of tCREs  
+- **Question**: Are human tCREs conserved in model organisms (e.g., mouse)? Which tCREs are evolutionarily conserved?  
+- **Relevance**: Highly conserved regulatory elements are likely to play critical roles in disease mechanisms and represent strong candidates for therapeutic targeting.  
+- **Application**: Facilitates functional validation of tCREs using animal models.  
+
+## ✍️ Summary
+
+- The study systematically mapped **tCREs** across human tissues at single-cell resolution.  
+- It revealed **cell-type-specific regulatory mechanisms underlying disease risk**, offering new insights for precision medicine.  
+- Technologies used: **scRNA-seq (5′), scATAC-seq, bulk RNA-seq, bulk ATAC-seq, bulk CAGE**.  
+- Future research could explore **tissue specificity**, **disease dynamics**, and **evolutionary conservation** of tCREs.  
+- Computational approaches such as differential activity analysis, pseudotime modeling, and cross-species comparison can extend these findings.  
