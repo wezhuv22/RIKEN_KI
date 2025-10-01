@@ -1,0 +1,95 @@
+---
+title: "Task7"
+author: "Wentao"
+date: "2025-10-01"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+
+df <- read.csv("/Users/k6-fjw46tf2v3/Downloads/magic_guys.csv", stringsAsFactors = FALSE)
+df$species <- as.factor(df$species)
+df$length <- as.numeric(df$length)
+
+png("hist_base_species1_breaks15.png"); hist(df$length[df$species==levels(df$species)[1]], breaks=15, main=paste(levels(df$species)[1],"Lengths")); dev.off()
+png("hist_base_species2_breaks15.png"); hist(df$length[df$species==levels(df$species)[2]], breaks=15, main=paste(levels(df$species)[2],"Lengths")); dev.off()
+png("hist_base_species1_breaks30.png"); hist(df$length[df$species==levels(df$species)[1]], breaks=30, main=paste(levels(df$species)[1],"Lengths (30 breaks)")); dev.off()
+png("hist_base_species2_breaks30.png"); hist(df$length[df$species==levels(df$species)[2]], breaks=30, main=paste(levels(df$species)[2],"Lengths (30 breaks)")); dev.off()
+
+p_hist_overlay <- ggplot(df, aes(x=length, fill=species)) + geom_histogram(position="identity", alpha=0.5, bins=30) + theme_minimal()
+ggsave("hist_gg_overlay.png", p_hist_overlay, width=6, height=4, dpi=300)
+ggsave("hist_gg_overlay.pdf", p_hist_overlay, width=6, height=4)
+ggsave("hist_gg_overlay.svg", p_hist_overlay, width=6, height=4)
+
+p_hist_facet <- ggplot(df, aes(x=length)) + geom_histogram(bins=25) + facet_wrap(~species, ncol=1) + theme_minimal()
+ggsave("hist_gg_facet.png", p_hist_facet, width=6, height=6, dpi=300)
+ggsave("hist_gg_facet.pdf", p_hist_facet, width=6, height=6)
+ggsave("hist_gg_facet.svg", p_hist_facet, width=6, height=6)
+
+png("boxplot_base.png"); boxplot(length ~ species, data=df); dev.off()
+pdf("boxplot_base.pdf"); boxplot(length ~ species, data=df); dev.off()
+svg("boxplot_base.svg"); boxplot(length ~ species, data=df); dev.off()
+
+p_box <- ggplot(df, aes(x=species, y=length, fill=species)) + geom_boxplot() + theme_minimal()
+ggsave("boxplot_gg.png", p_box, width=5, height=4, dpi=300)
+ggsave("boxplot_gg.pdf", p_box, width=5, height=4)
+ggsave("boxplot_gg.svg", p_box, width=5, height=4)
+
+mat <- read.table("/Users/k6-fjw46tf2v3/Downloads/microarray_data.tab", header=TRUE, sep="\t", check.names=FALSE, stringsAsFactors=FALSE)
+num_cols <- sapply(mat, is.numeric)
+numericMat <- as.matrix(mat[, num_cols, drop=FALSE])
+dims_full <- dim(mat); dims_numeric <- dim(numericMat); print(dims_full); print(dims_numeric)
+
+na_count <- rowSums(is.na(numericMat))
+png("na_per_gene_hist.png"); hist(na_count, main="Missing values per gene"); dev.off()
+pdf("na_per_gene_hist.pdf"); hist(na_count, main="Missing values per gene"); dev.off()
+svg("na_per_gene_hist.svg"); hist(na_count, main="Missing values per gene"); dev.off()
+
+prop_na <- na_count / ncol(numericMat)
+idx10 <- which(prop_na > 0.10)
+idx20 <- which(prop_na > 0.20)
+idx50 <- which(prop_na > 0.50)
+print(length(idx10)); print(length(idx20)); print(length(idx50))
+
+gene_ids <- if (!is.numeric(mat[[1]])) as.character(mat[[1]]) else paste0("gene_", seq_len(nrow(mat)))
+genes10 <- gene_ids[idx10]
+genes20 <- gene_ids[idx20]
+genes50 <- gene_ids[idx50]
+print(head(genes10)); print(head(genes20)); print(head(genes50))
+
+numericMat_imp <- numericMat
+rmn <- rowMeans(numericMat_imp, na.rm=TRUE)
+w <- which(is.na(numericMat_imp), arr.ind=TRUE)
+numericMat_imp[w] <- rmn[w[,1]]
+
+data(CO2)
+p_co2 <- ggplot(CO2, aes(x=conc, y=uptake, color=Type)) + geom_point() + geom_smooth(method="loess", se=FALSE) + facet_wrap(~Treatment) + theme_minimal()
+ggsave("CO2_scatter.png", p_co2, width=7, height=4.5, dpi=300)
+ggsave("CO2_scatter.pdf", p_co2, width=7, height=4.5)
+ggsave("CO2_scatter.svg", p_co2, width=7, height=4.5)
+
+sessionInfo()
+
+
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
